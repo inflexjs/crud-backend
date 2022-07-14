@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 
@@ -23,6 +24,7 @@ func (h *Handler) userIdentify(c *gin.Context) {
 	headerParts := strings.Split(header, " ")
 	if len(headerParts) != 2 {
 		exception.NewError(c, http.StatusUnauthorized, "invalid auth header")
+		return
 	}
 
 	userId, err := h.services.Authorization.ParseToken(headerParts[1])
@@ -32,4 +34,20 @@ func (h *Handler) userIdentify(c *gin.Context) {
 	}
 
 	c.Set(userCtx, userId)
+}
+
+func getUserId(c *gin.Context) (int, error) {
+	id, ok := c.Get(userCtx)
+	if !ok {
+		exception.NewError(c, http.StatusInternalServerError, "user id not found")
+		return 0, errors.New("user id not found")
+	}
+
+	idInt, ok := id.(int)
+	if !ok {
+		exception.NewError(c, http.StatusInternalServerError, "user id is of invalid type")
+		return 0, errors.New("user id is of invalid type")
+	}
+
+	return idInt, nil
 }

@@ -36,6 +36,6 @@ CREATE TABLE users_comments
 CREATE TABLE posts_comments
 (
     id serial not null unique,
-    comment int references comments (id) on delete cascade not null,
-    posts int references posts (id) on delete cascade not null
+    comment_id int references comments (id) on delete cascade not null,
+    post_id int references posts (id) on delete cascade not null
 );

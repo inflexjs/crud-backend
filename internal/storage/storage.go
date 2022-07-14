@@ -11,6 +11,7 @@ type Authorization interface {
 }
 
 type Post interface {
+	Create(userId int, post models.Post) (int, error)
 }
 
 type Comment interface {
@@ -25,5 +26,6 @@ type Storage struct {
 func NewStorage(db *sqlx.DB) *Storage {
 	return &Storage{
 		Authorization: NewAuthPostgres(db),
+		Post:          NewPostPostgres(db),
 	}
 }

@@ -4,10 +4,28 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/inflexjs/crud-backend/internal/exception"
+	"github.com/inflexjs/crud-backend/internal/models"
 )
 
 func (h *Handler) createPost(c *gin.Context) {
-	id, _ := c.Get(userCtx)
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+
+	var input models.Post
+	if err := c.BindJSON(&input); err != nil {
+		exception.NewError(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	id, err := h.services.Post.Create(userId, input)
+	if err != nil {
+		exception.NewError(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,
 	})
