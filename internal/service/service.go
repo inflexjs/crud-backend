@@ -1,8 +1,8 @@
 package service
 
 import (
+	"github.com/inflexjs/crud-backend/internal/models"
 	"github.com/inflexjs/crud-backend/internal/storage"
-	"github.com/inflexjs/crud-backend/models"
 )
 
 type Authorization interface {

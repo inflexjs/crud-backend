@@ -3,7 +3,7 @@ package storage
 import (
 	"fmt"
 
-	"github.com/inflexjs/crud-backend/models"
+	"github.com/inflexjs/crud-backend/internal/models"
 	"github.com/jmoiron/sqlx"
 )
 

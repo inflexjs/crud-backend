@@ -4,8 +4,8 @@ import (
 	"crypto/sha1"
 	"fmt"
 
+	"github.com/inflexjs/crud-backend/internal/models"
 	"github.com/inflexjs/crud-backend/internal/storage"
-	"github.com/inflexjs/crud-backend/models"
 )
 
 const salt = "idfgeh27348hfg390gh3"

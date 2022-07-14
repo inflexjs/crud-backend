@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/inflexjs/crud-backend/internal/exceptions"
-	"github.com/inflexjs/crud-backend/models"
+	"github.com/inflexjs/crud-backend/internal/models"
 )
 
 func (h *Handler) signUp(c *gin.Context) {
