@@ -46,6 +46,9 @@ func main() {
 	services := service.NewService(storages)
 	handlers := handler.NewHandler(services)
 
+	// Gin mode - release or debug
+	//gin.SetMode(os.Getenv("GIN_MODE"))
+
 	// Инициализация net/http сервера
 	srv := new(crud.Server)
 	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {

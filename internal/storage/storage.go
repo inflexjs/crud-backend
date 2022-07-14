@@ -7,6 +7,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user models.User) (int, error)
+	GetUser(username, password string) (models.User, error)
 }
 
 type Post interface {
@@ -26,5 +27,3 @@ func NewStorage(db *sqlx.DB) *Storage {
 		Authorization: NewAuthPostgres(db),
 	}
 }
-
-// docker run --name=crud-db -e POSTGRES_PASSWORD='7970' -p 5436:5432 -d --rm postgres
