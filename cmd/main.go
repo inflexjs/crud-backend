@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/sirupsen/logrus"
 
 	"github.com/inflexjs/crud-backend"
 	"github.com/inflexjs/crud-backend/internal/handler"
@@ -15,14 +15,17 @@ import (
 )
 
 func main() {
+	// Определение формата JSON для logrus
+	logrus.SetFormatter(new(logrus.JSONFormatter))
+
 	// Инициализация .yml конфига
 	if err := initConfig(); err != nil {
-		log.Fatalf("error initializing .yml config: %s", err.Error())
+		logrus.Fatalf("error initializing .yml config: %s", err.Error())
 	}
 
 	// Инициализация .env конфига
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error initializing .env config: %s", err.Error())
+		logrus.Fatalf("error initializing .env config: %s", err.Error())
 	}
 
 	// Инициализация database
@@ -35,7 +38,7 @@ func main() {
 		Password: os.Getenv("DB_PASSWORD"),
 	})
 	if err != nil {
-		log.Fatalf("failed to initialize db: %s", err.Error())
+		logrus.Fatalf("failed to initialize db: %s", err.Error())
 	}
 
 	// Инициализация зависимостей
@@ -46,7 +49,7 @@ func main() {
 	// Инициализация net/http сервера
 	srv := new(crud.Server)
 	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
-		log.Fatalf("error occured while running http server: %s", err.Error())
+		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}
 }
 
