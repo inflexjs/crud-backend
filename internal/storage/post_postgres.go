@@ -55,7 +55,7 @@ func (r *PostPostgres) GetAll(userId int) ([]models.Post, error) {
 	return posts, err
 }
 
-func (r *PostPostgres) GetPostById(userId, postId int) (models.Post, error) {
+func (r *PostPostgres) GetById(userId, postId int) (models.Post, error) {
 	var post models.Post
 
 	query := fmt.Sprintf(

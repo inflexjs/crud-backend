@@ -61,7 +61,7 @@ func (h *Handler) getPostById(c *gin.Context) {
 		return
 	}
 
-	post, err := h.services.Post.GetPostById(userId, id)
+	post, err := h.services.Post.GetById(userId, id)
 	if err != nil {
 		response.NewError(c, http.StatusInternalServerError, err.Error())
 		return
@@ -88,7 +88,7 @@ func (h *Handler) updatePost(c *gin.Context) {
 		return
 	}
 
-	if err := h.services.Update(userId, id, input); err != nil {
+	if err := h.services.Post.Update(userId, id, input); err != nil {
 		response.NewError(c, http.StatusInternalServerError, err.Error())
 		return
 	}

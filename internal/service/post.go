@@ -21,8 +21,8 @@ func (s *PostService) GetAll(userId int) ([]models.Post, error) {
 	return s.store.GetAll(userId)
 }
 
-func (s *PostService) GetPostById(userId, postId int) (models.Post, error) {
-	return s.store.GetPostById(userId, postId)
+func (s *PostService) GetById(userId, postId int) (models.Post, error) {
+	return s.store.GetById(userId, postId)
 }
 
 func (s *PostService) Delete(userId, postId int) error {
