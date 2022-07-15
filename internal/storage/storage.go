@@ -19,6 +19,7 @@ type Post interface {
 }
 
 type Comment interface {
+	Create(postId int, comment models.Comment) (int, error)
 }
 
 type Storage struct {

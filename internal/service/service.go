@@ -20,7 +20,7 @@ type Post interface {
 }
 
 type Comment interface {
-	Create(userId, postId int, comment models.Comment) (int, error)
+	Create(postId int, comment models.Comment) (int, error)
 }
 
 type Service struct {
