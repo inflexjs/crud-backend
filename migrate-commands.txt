@@ -1,2 +1,0 @@
-migrate -path ./schema -database postgres://postgres:7970@localhost:5436/postgres?sslmode=disable up
-migrate -path ./schema -database postgres://postgres:7970@localhost:5436/postgres?sslmode=disable down
