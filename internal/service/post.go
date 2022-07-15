@@ -16,3 +16,22 @@ func NewPostService(store storage.Post) *PostService {
 func (s *PostService) Create(userId int, post models.Post) (int, error) {
 	return s.store.Create(userId, post)
 }
+
+func (s *PostService) GetAll(userId int) ([]models.Post, error) {
+	return s.store.GetAll(userId)
+}
+
+func (s *PostService) GetPostById(userId, postId int) (models.Post, error) {
+	return s.store.GetPostById(userId, postId)
+}
+
+func (s *PostService) Delete(userId, postId int) error {
+	return s.store.Delete(userId, postId)
+}
+
+func (s *PostService) Update(userId, postId int, input models.UpdatePostInput) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
+	return s.store.Update(userId, postId, input)
+}

@@ -12,6 +12,10 @@ type Authorization interface {
 
 type Post interface {
 	Create(userId int, post models.Post) (int, error)
+	GetAll(userId int) ([]models.Post, error)
+	GetPostById(userId, postId int) (models.Post, error)
+	Delete(userId, postId int) error
+	Update(userId, id int, input models.UpdatePostInput) error
 }
 
 type Comment interface {
